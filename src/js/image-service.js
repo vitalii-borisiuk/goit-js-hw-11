@@ -24,10 +24,6 @@ export default class ImageApiService {
                 this.incrementPage();
                 return data.data
             })
-            // .then(({ hits }) => {
-                
-            //     return hits;
-            // });
     };
 
     incrementPage() {

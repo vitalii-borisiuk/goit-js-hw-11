@@ -44,7 +44,6 @@ async function onSearch(event) {
 
 async function loadImage() {
   loadMoreBtn.disable();
-  // let hitsLength;
 
   try {
     await imageApiService.fetchArticles().then(imageData => {
