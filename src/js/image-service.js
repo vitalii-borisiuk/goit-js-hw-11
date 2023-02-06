@@ -6,8 +6,6 @@ export default class ImageApiService {
     constructor() {
         this.searchQuery = '';
         this.page = 1;
-        this.totalHits = 0;
-
     };
 
     async fetchArticles() {
@@ -22,13 +20,14 @@ export default class ImageApiService {
 
         const { apiKey, type, orientation, searchSettings, per_page } = options;
         return await axios.get(`${fetchUrl}/?key=${apiKey}&q=${this.searchQuery}&${type}&${orientation}&${searchSettings}&${per_page}&page=${this.page}`)
-            .then(data => data.data)
-            .then(({ hits }) => {
-                this.totalHits += hits.length;
+            .then(data => {
                 this.incrementPage();
-                Notify.success(`Hooray! We found ${this.totalHits} images.`);
-                return hits;
-            });
+                return data.data
+            })
+            // .then(({ hits }) => {
+                
+            //     return hits;
+            // });
     };
 
     incrementPage() {
@@ -37,7 +36,6 @@ export default class ImageApiService {
 
     resetPage() {
         this.page = 1;
-        this.totalHits = 0;
     };
 
     get query() {
