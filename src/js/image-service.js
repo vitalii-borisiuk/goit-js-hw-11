@@ -19,11 +19,14 @@ export default class ImageApiService {
     };
 
         const { apiKey, type, orientation, searchSettings, per_page } = options;
-        return await axios.get(`${fetchUrl}/?key=${apiKey}&q=${this.searchQuery}&${type}&${orientation}&${searchSettings}&${per_page}&page=${this.page}`)
-            .then(data => {
-                this.incrementPage();
-                return data.data
-            })
+        const imageData = await axios.get(`${fetchUrl}/?key=${apiKey}&q=${this.searchQuery}&${type}&${orientation}&${searchSettings}&${per_page}&page=${this.page}`)
+        // const data = imageData.then(data => {
+        //         this.incrementPage();
+        //         return data.data
+        //     })
+        // console.log();
+        this.incrementPage();
+        return imageData.data;
     };
 
     incrementPage() {
